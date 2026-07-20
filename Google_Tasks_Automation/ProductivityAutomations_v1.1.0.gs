@@ -157,25 +157,60 @@ function generateDailyTasks() {
     }
   }
 
-  // 3. Household Cleaning (Pop Top Priority)
-  const cleanSheet = ss.getSheetByName("Household Cleaning Queue");
-  const cleanData = cleanSheet.getDataRange().getValues();
-  let cleanItems = [];
-  for (let i = 1; i < cleanData.length; i++) {
-    cleanItems.push({row: i+1, area: cleanData[i][0], priority: cleanData[i][1], urgent: cleanData[i][2]});
-  }
-  cleanItems.sort((a, b) => a.priority - b.priority);
-  
-  if (cleanItems.length > 0) {
-    let topItem = cleanItems[0];
-    let taskTitle = `[Household] Deep Clean: ${topItem.area}`;
-    let res = ensureTaskExistsAndAllowed(taskTitle, null, getTaskListId("Household"), false);
+  // 3. Household Tasks (Finite Maintenance)
+  const householdSheet = ss.getSheetByName("Household Tasks");
+  if (householdSheet) {
+    const householdData = householdSheet.getDataRange().getValues();
+    let householdItems = [];
+    for (let i = 1; i < householdData.length; i++) {
+      if (householdData[i][2] !== "Assigned" && householdData[i][2] !== "Completed") {
+        householdItems.push({row: i+1, taskName: householdData[i][0], priority: householdData[i][1]});
+      }
+    }
+    householdItems.sort((a, b) => a.priority - b.priority);
     
-    if (res.reason !== "CIRCUIT_BREAKER") {
-      briefText += `- ${taskTitle}\n`;
-      cleanSheet.getRange(topItem.row, 2).setValue(999);
-      cleanSheet.getRange(topItem.row, 4).setValue(new Date());
-      totalTasksAdded++;
+    if (householdItems.length > 0) {
+      let topItem = householdItems[0];
+      let taskTitle = `[Household] ${topItem.taskName}`;
+      let res = ensureTaskExistsAndAllowed(taskTitle, null, getTaskListId("Household"), true);
+      
+      if (res.reason !== "CIRCUIT_BREAKER" && res.reason !== "RECENTLY_COMPLETED") {
+        briefText += `- ${taskTitle}\n`;
+        householdSheet.getRange(topItem.row, 3).setValue("Assigned");
+        totalTasksAdded++;
+      }
+    }
+  }
+
+  // 4. Chores Queue (Recurring Rotation)
+  const choresSheet = ss.getSheetByName("Chores Queue");
+  if (choresSheet) {
+    const choresData = choresSheet.getDataRange().getValues();
+    let choresItems = [];
+    for (let i = 1; i < choresData.length; i++) {
+      choresItems.push({row: i+1, name: choresData[i][0], priority: choresData[i][1] || 0, urgent: choresData[i][2], lastAssigned: choresData[i][3]});
+    }
+    
+    choresItems.sort((a, b) => {
+      if (a.priority === b.priority) {
+        let dateA = a.lastAssigned ? new Date(a.lastAssigned).getTime() : 0;
+        let dateB = b.lastAssigned ? new Date(b.lastAssigned).getTime() : 0;
+        return dateA - dateB;
+      }
+      return a.priority - b.priority;
+    });
+    
+    if (choresItems.length > 0) {
+      let topItem = choresItems[0];
+      let taskTitle = `[Chore] ${topItem.name}`;
+      let res = ensureTaskExistsAndAllowed(taskTitle, null, getTaskListId("Chores"), false);
+      
+      if (res.reason !== "CIRCUIT_BREAKER") {
+        briefText += `- ${taskTitle}\n`;
+        choresSheet.getRange(topItem.row, 2).setValue(999);
+        choresSheet.getRange(topItem.row, 4).setValue(new Date());
+        totalTasksAdded++;
+      }
     }
   }
 
