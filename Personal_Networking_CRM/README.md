@@ -50,4 +50,21 @@ This script is designed to run 24/7 on your local homelab. It has an internal sc
 ```bash
 docker-compose up -d --build
 ```
-The container will spin up, run the math once immediately, and then arm the 3:30 AM timer. You can walk away forever.
+You can now close the Proxmox web browser. The Docker container will run silently in the background of your homelab forever, waking up every morning at 3:30 AM to calculate your networking intervals.
+
+## 5. Mobile UI Setup & Day-to-Day Use
+The engine is automated, meaning your only interaction with this CRM is on your phone when you actually talk to someone.
+
+**Setting up the Mobile View:**
+1. Open the Notion app on your phone and go to your Personal CRM database.
+2. Tap the `+` icon next to the current view name to create a new View.
+3. Select **Gallery** or **List**.
+4. Tap **Properties** and hide everything *except* the `Name` and the `I_Contacted_Them_Today` checkbox.
+5. Tap **Sort**, select `Last_Contacted_Date`, and set it to **Ascending** (so the people you haven't spoken to the longest are at the top).
+
+**The 5-Second Workflow:**
+When you finish a coffee chat or text a contact:
+1. Open the app and find their name.
+2. **Check the `I_Contacted_Them_Today` box.**
+3. (Optional) Type a quick note in `Rich_Text_Notes`.
+*That's it. At 3:30 AM, the server will detect the checked box, update the date to today, uncheck the box for you, and move them to the bottom of your list!*
