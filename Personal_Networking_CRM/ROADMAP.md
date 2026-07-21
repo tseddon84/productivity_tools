@@ -1,31 +1,35 @@
-# Roadmap: Personal Networking CRM
+# Product Roadmap: Personal Networking CRM
 
-## Current Version: v0.1.0
-- Automated daily processing via Docker scheduling (03:30 AM).
-- Notion API integration for fetching and parsing contact intervals.
-- Interval calculation based on connection strength.
-- Discord and Email notifications for overdue contacts.
-- Frictionless mobile-optimized Notion UI workflow.
+**Vision Statement:** A frictionless, mobile-optimized networking CRM built on Notion that automates relationship tracking and intelligent outreach reminders without requiring manual data entry maintenance.
 
-## Future Enhancements
+## Phase 1: V1 Core Engine (Current Focus)
+**Status:** ✅ Completed | **Target Version:** v0.1.0
+*User Value:* Eliminates the mental load of remembering to reach out to contacts by fully automating interval-based outreach math and pushing notifications directly to email and Discord.
+- [x] Notion API integration for fetching and parsing contact intervals.
+- [x] Automated daily processing via Docker scheduling (03:30 AM).
+- [x] Discord and Email automated notifications for overdue contacts.
+- [x] Frictionless mobile-optimized Notion UI workflow (1-tap logging).
 
-### 1. Database Schema Expansion
-Expand the Notion database schema to transition away from relying solely on a single `Rich_Text_Notes` field. Adding dedicated, structured fields will allow for better filtering, sorting, and more granular memory tracking.
+## Phase 2: Database Schema Expansion (Up Next)
+**Status:** 📅 Planned | **Target Version:** v0.2.0
+*User Value:* Allows for granular memory tracking, relationship context, and advanced filtering to make automated outreach feel incredibly personal and authentic.
+- [ ] **Milestone 1: Create Dedicated Notion Properties**
+  - [ ] Birthday
+  - [ ] Spouse (Name)
+  - [ ] Spouse's Birthday
+  - [ ] Kids (Names/Ages)
+  - [ ] Kids' Birthdays
+  - [ ] Pets
+  - [ ] Likes
+  - [ ] Dislikes
+  - [ ] Shared Activities
+  - [ ] Preferred Method of Contact
+  - [ ] Contact Information
+  - [ ] Occupation
+  - [ ] Company
+- [ ] **Milestone 2: Notification Engine Upgrade**
+  - Update `notion_service.py` to parse the new structured fields.
+  - Inject the context variables directly into the automated morning outreach summaries.
 
-**Planned Fields to Add:**
-- [ ] Birthday
-- [ ] Spouse
-- [ ] Spouse's Birthday
-- [ ] Kids
-- [ ] Kids' Birthdays
-- [ ] Pets
-- [ ] Likes
-- [ ] Dislikes
-- [ ] Shared Activities
-- [ ] Preferred Method of Contact
-- [ ] Contact Information
-- [ ] Occupation
-- [ ] Company
-
-### 2. Notification Engine Updates
-- Once the new database fields are added, update the Python script to parse these new fields and intelligently inject them into the automated morning outreach summaries.
+---
+*Note to Users: This roadmap is a living document. Priorities and versions are subject to change based on testing and feedback.*
