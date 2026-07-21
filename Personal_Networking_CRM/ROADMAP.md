@@ -31,7 +31,14 @@
   - Update `notion_service.py` to parse the new structured fields.
   - Inject the context variables directly into the automated morning outreach summaries.
 
-## Phase 3: Advanced Intelligence (Ideation)
+## Phase 3: The "Master Brain" Migration (Architecture Pivot)
+**Status:** 💡 Ideation | **Target Version:** v0.3.0
+*User Value:* Transforms the CRM by storing a permanent, timestamped audit log of every interaction on your local server, keeping the mobile app clean and frictionless.
+- [ ] **Local SQLite Database:** Deploy an internal database inside the Docker container to permanently store historical notes.
+- [ ] **Nightly Sweep & Clean:** Python reads the Notion notes, saves them to the local database with a timestamp, and erases them from Notion to keep the mobile UI clean.
+- [ ] **Docker Volume Backup:** Ensure the Proxmox server is properly backing up the Docker volume to prevent data loss.
+
+## Phase 4: Advanced Intelligence (Ideation)
 **Status:** 💡 Ideation | **Target Version:** TBD
 *User Value:* Transforms the tool from a reminder script into a proactive relationship manager.
 - [ ] **Location-Based Triaging ("I'm in Town"):** Add a travel trigger that scans the database by City/State and instantly emails a sorted list of local contacts when you travel.
