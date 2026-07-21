@@ -30,7 +30,20 @@ Create a new database in Notion with the following EXACT columns (case-sensitive
    cp .env.example .env
    ```
 2. Open `.env` and paste your `NOTION_TOKEN` and `NOTION_DATABASE_ID`.
-3. Set `USE_DISCORD` or `USE_EMAIL` to `true` and fill in the corresponding credentials.
+3. Set `USE_DISCORD` or `USE_EMAIL` to `true` and fill in the corresponding credentials:
+
+**If using Discord:**
+1. Open your Discord server and go to **Server Settings** > **Integrations** > **Webhooks**.
+2. Click **New Webhook**, select the channel you want the CRM to post in, and click **Copy Webhook URL**.
+3. Paste this into `DISCORD_WEBHOOK_URL` in your `.env` file.
+
+**If using Gmail:**
+1. You cannot use your normal Gmail password. Go to your [Google Account Security Settings](https://myaccount.google.com/security).
+2. Ensure **2-Step Verification** is turned on.
+3. Search for **App Passwords** in the search bar. 
+4. Create a new App Password named "Personal CRM".
+5. Copy the 16-character password and paste it into `SMTP_PASSWORD`. 
+6. Set `SMTP_SERVER="smtp.gmail.com"` and `SMTP_PORT=587`.
 
 ### 4. Deploy the Engine (Homelab)
 This script is designed to run 24/7 on your local homelab. It has an internal scheduler set to exactly 03:30 AM.
