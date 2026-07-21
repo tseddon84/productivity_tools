@@ -21,7 +21,7 @@ Create a new database in Notion with the following EXACT columns (case-sensitive
 1. Go to [Notion Integrations](https://www.notion.so/my-integrations).
 2. Click **New Integration**, name it "Personal CRM", and copy the **Internal Integration Token**.
 3. Go back to your Notion Database. Click the `...` menu in the top right.
-4. Click **Connect to** and search for "Personal CRM". Click it to grant the script access to your database.
+4. Scroll down and click **Connections**, then click **Connect to**, and search for "Personal CRM". Click it to grant the script access to your database.
 5. Extract the **Database ID** from your Notion URL (it's the 32-character string between the workspace name and the `?v=` parameter).
 
 ### 3. Configure the Environment
