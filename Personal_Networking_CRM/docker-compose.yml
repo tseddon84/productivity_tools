@@ -1,0 +1,7 @@
+services:
+  personal-crm:
+    build: .
+    container_name: personal-crm
+    restart: unless-stopped
+    env_file:
+      - .env
