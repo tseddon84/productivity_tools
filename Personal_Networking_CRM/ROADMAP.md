@@ -24,6 +24,8 @@ Expand the Notion database schema to transition away from relying solely on a si
 - [ ] Shared Activities
 - [ ] Preferred Method of Contact
 - [ ] Contact Information
+- [ ] Occupation
+- [ ] Company
 
 ### 2. Notification Engine Updates
 - Once the new database fields are added, update the Python script to parse these new fields and intelligently inject them into the automated morning outreach summaries.
