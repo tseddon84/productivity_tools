@@ -31,5 +31,13 @@
   - Update `notion_service.py` to parse the new structured fields.
   - Inject the context variables directly into the automated morning outreach summaries.
 
+## Phase 3: Advanced Intelligence (Ideation)
+**Status:** 💡 Ideation | **Target Version:** TBD
+*User Value:* Transforms the tool from a reminder script into a proactive relationship manager.
+- [ ] **Location-Based Triaging ("I'm in Town"):** Add a travel trigger that scans the database by City/State and instantly emails a sorted list of local contacts when you travel.
+- [ ] **LLM Context Summarization:** Pass historical interaction notes through a lightweight AI model to generate a perfect 2-sentence relationship summary and icebreaker for the morning email.
+- [ ] **Automated "Dormant" Tagging:** If a contact's interval is ignored for 3 consecutive cycles, automatically tag them as `Dormant` to keep the active database clean and prevent bloat.
+- [ ] **Life Event Auto-Triggers:** Force contacts to the top of the morning priority list if the script detects that today matches a birthday or anniversary field.
+
 ---
 *Note to Users: This roadmap is a living document. Priorities and versions are subject to change based on testing and feedback.*
